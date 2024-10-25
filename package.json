@@ -3,11 +3,11 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "start": "npm run ",
-    "server": "nodemon Server/index.js nodemon Server/weatherData.js",
+    "start": "npm run dev",
+    "server": "concurrently \"nodemon Server/index.js\" \"nodemon Server/weatherData.js\"",
     "frontend": "npm run dev --prefix FrontEnd",
     "dev": "concurrently \"npm run server\" \"npm run frontend\"",
-    "install-all": "npm install --prefix frontend && npm install --prefix server"
+    "install-all": "npm install --prefix FrontEnd && npm install --prefix Server"
   },
   "author": "",
   "license": "ISC",
