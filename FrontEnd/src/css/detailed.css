@@ -1,0 +1,71 @@
+.detailed-page-container {
+  position: relative;
+  top: 100px !important;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  min-height: 100vh; /* Ensure it takes at least the full viewport height */
+  margin-top: 200px;
+  color: #333; /* Dark text color */
+  padding: 20px;
+  font-family: "Arial", sans-serif; /* Font style */
+  /* Position for the overlay */
+}
+
+.content {
+  position: relative; /* Position for content to stay above the overlay */
+  z-index: 2; /* Ensure content is above the overlay */
+}
+
+.city-name {
+  font-size: 3rem;
+  margin-bottom: 20px;
+  color: #0077b6; /* Color for city name */
+  text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.7); /* Subtle shadow */
+}
+
+.card {
+  background-color: rgba(255, 255, 255, 0.9); /* Slightly transparent white */
+  border-radius: 15px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  width: 90%; /* Responsive width */
+  max-width: 1200px; /* Max width for larger screens */
+  padding: 20px;
+  margin: 20px auto; /* Center the card */
+}
+
+.weather-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin: 15px 0;
+}
+
+.weather-icon {
+  font-size: 3rem; /* Increased icon size for better visibility */
+
+  color: #0077b6; /* Icon color */
+  margin-bottom: 10px; /* Space between icon and text */
+}
+
+.imgborder {
+  background-color: rgba(169, 169, 169, 0.484) !important;
+  border-radius: 10px;
+}
+footer {
+  margin-top: 20px;
+  font-size: 0.9rem;
+  color: #666;
+  text-align: center; /* Center the footer */
+}
+.main {
+  display: inline;
+  align-items: center;
+  justify-content: center;
+}
+
+.h2 main {
+  text-align: center !important;
+}

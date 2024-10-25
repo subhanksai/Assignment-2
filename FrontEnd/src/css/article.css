@@ -1,0 +1,51 @@
+.section {
+  padding: 20px;
+  width: 1400px; /* Set a max width for the main section */
+  margin: 0 auto; /* Center the main section */
+  border: 1px solid #dee2e6; /* Border around the main section */
+  border-radius: 5px; /* Rounded corners */
+  background-color: #fff; /* White background */
+  display: flex;
+  align-items: center;
+  height: 600px;
+}
+
+h1 {
+  text-align: center; /* Center the title */
+}
+
+.article-list {
+  max-height: 600px; /* Set a fixed height for the scrolling area */
+  overflow-y: auto; /* Enable vertical scrolling */
+  margin-top: 20px; /* Space between title and list */
+  border: 1px solid #dee2e6; /* Border around the article list */
+  border-radius: 5px; /* Rounded corners */
+}
+
+.list-group {
+  list-style: none; /* Remove default list styling */
+  padding: 0; /* Remove padding */
+}
+
+.article-link {
+  text-decoration: none;
+  color: #007bff; /* Bootstrap primary color */
+}
+
+.article-link:hover {
+  text-decoration: underline; /* Add underline on hover */
+}
+
+.list-group-item {
+  padding: 15px;
+  border: none; /* Remove the default border */
+  border-bottom: 1px solid #dee2e6; /* Add a bottom border */
+}
+
+.list-group-item:last-child {
+  border-bottom: none; /* Remove bottom border from the last item */
+}
+
+.list-group-item:hover {
+  background-color: #f8f9fa; /* Light background on hover */
+}

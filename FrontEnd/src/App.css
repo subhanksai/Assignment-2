@@ -1,0 +1,203 @@
+/* General Navbar Styles */
+.html,
+body {
+  background-image: url("/src/Images/BG2.jpeg");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.navbar {
+  position: fixed;
+  top: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  background-image: url("/src/Images/BG2.jpeg");
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.043) 90%,
+    rgba(255, 255, 255, 0.393) 100%
+  );
+  padding: 20px 20px;
+  z-index: 10;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.nav-logo a {
+  color: white;
+  font-size: 1.5rem;
+  text-decoration: none;
+  font-weight: bold;
+  white-space: nowrap; /* Prevent logo text from wrapping */
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  margin: 0;
+}
+
+.nav-links li {
+  margin-left: 20px;
+  white-space: nowrap; /* Prevent link text from wrapping */
+}
+
+.nav-links a {
+  color: white;
+  text-decoration: none;
+  font-size: 1.2rem;
+  transition: color 0.3s ease;
+}
+
+.nav-links a:hover {
+  color: #00b4d8;
+}
+
+/* Mobile Toggle Button */
+.nav-toggle {
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+}
+
+.bar {
+  height: 3px;
+  width: 25px;
+  background-color: white;
+  margin: 4px 0;
+}
+
+/* Search bar styling */
+.mainbar {
+  display: flex;
+  align-items: center;
+  max-width: 500px; /* Prevent search bar from growing too large */
+  width: 100%; /* Stretch search bar across available space */
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .nav-toggle {
+    display: flex;
+  }
+
+  .nav-links {
+    position: absolute;
+    top: 60px;
+    right: 0;
+    background-color: #0077b6;
+    flex-direction: column;
+    width: 100%;
+    height: calc(100vh - 60px);
+    align-items: center;
+    justify-content: center;
+    display: none;
+  }
+
+  .nav-links.active {
+    display: flex;
+  }
+
+  .nav-links li {
+    margin: 20px 0;
+  }
+}
+
+.search {
+  position: relative;
+  top: 3px;
+  left: 15px;
+}
+
+/* Search Button Styles */
+.searchbutton {
+  display: inline-flex; /* Keep the button inline with content */
+  align-items: center; /* Vertically center the icon */
+  justify-content: center; /* Horizontally center the icon */
+  padding: 12px; /* Add padding to the icon */
+  border-radius: 5px; /* Optional: round corners */
+  width: 50px;
+}
+
+.searchbutton:hover {
+  border: 1px solid gray; /* Thin border on hover */
+  cursor: pointer; /* Change cursor to pointer */
+}
+/* Search Bar Inner Styles */
+.searchbar {
+  height: 50px; /* Keep this consistent */
+  width: 100%; /* Full width */
+  display: flex; /* Use flexbox for layout */
+  align-items: center; /* Center items vertically */
+  justify-content: space-between; /* Space items out evenly */
+  gap: 10px; /* Optional: add gap between elements */
+}
+
+#bar {
+  padding: 5px; /* Add padding for better usability */
+  background-color: white; /* White background color */
+  height: 20px; /* Match height with the search bar */
+  width: 550px; /* Set width */
+  outline: none; /* Remove outline on focus */
+  border: none; /* Remove border */
+}
+.search {
+  display: flex; /* Use flexbox for layout */
+  align-items: center; /* Center items vertically */
+  border-radius: 10px; /* Rounded corners */
+  background-color: white; /* White background for search */
+  opacity: 0.8; /* Slightly adjust opacity for visibility */
+  height: 50px; /* Fixed height for the search bar */
+  width: 80%; /* Adjust width as needed */
+  max-width: 1000px; /* Max width */
+  border: 2px solid gray; /* Gray border */
+}
+
+.mainbar {
+  top: 0; /* Align it to the top of the viewport */
+  left: 0; /* Align it to the left */
+  right: 0; /* Align it to the right */
+  height: 250px; /* Set a fixed height */
+  padding: 4px; /* Add padding */
+  display: flex; /* Use flexbox for layout */
+  justify-content: center; /* Center items horizontally */
+  align-items: center; /* Center items vertically */
+  background-color: rgba(255, 255, 255, 0.7); /* Semi-transparent background */
+  border-radius: 10px; /* Round corners */
+  margin-bottom: 20px; /* Space below the main bar */
+  width: 100%;
+}
+.nav-auth {
+  margin-left: auto; /* Pushes the auth icon to the right */
+  padding: 0 20px; /* Optional: Add padding around the icon */
+  display: flex;
+  align-items: center; /* Center vertically */
+}
+.search {
+  position: relative; /* Position relative to allow absolute positioning of suggestions */
+}
+
+.suggestions {
+  position: absolute; /* Positioning to show dropdown below the input */
+  top: 100%; /* Align below the input */
+  left: 0;
+  right: 0;
+  background-color: #fff; /* Background color for the suggestions */
+  border: 1px solid #ddd; /* Border around the suggestions */
+  border-radius: 4px; /* Rounded corners */
+  z-index: 1000; /* Ensure it appears above other elements */
+  max-height: 200px; /* Max height for the dropdown */
+  overflow-y: auto; /* Scroll if there are too many suggestions */
+}
+
+.suggestion-item {
+  padding: 10px; /* Padding for each suggestion */
+  cursor: pointer; /* Pointer cursor for interactivity */
+  transition: background-color 0.2s; /* Transition for hover effect */
+}
+
+.suggestion-item:hover {
+  background-color: #f0f0f0; /* Change background color on hover */
+}
