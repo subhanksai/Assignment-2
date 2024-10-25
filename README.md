@@ -46,6 +46,49 @@ The application includes several test cases to ensure functionality:
   - **News API**: To provide weather-related news updates.
   - **GeoNames API**: For city name suggestions globally.
 
+
+https://github.com/user-attachments/assets/9015035d-fba5-4c35-a556-38e6ea8214cb
+
+https://github.com/user-attachments/assets/48f8af22-d586-4c99-ba05-4f588b6b4220
+
+https://github.com/user-attachments/assets/857a1f7a-df53-4e15-8291-7c6ea3223abf
+
+https://github.com/user-attachments/assets/de407239-f664-41e2-95ac-770292c504ea
+
+https://github.com/user-attachments/assets/ed42c5cd-ceac-416c-9ddc-d872e43930bb
+
+https://github.com/user-attachments/assets/6c1caf8b-9f3c-44cf-b4b6-997b68a824c4
+
+https://github.com/user-attachments/assets/ade6fd10-f696-40e4-8c08-95d311723d58
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ## Installation Guide
 To set up the project locally:
 1. Clone the repository.
