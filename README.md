@@ -12,10 +12,13 @@ This project implements a **Real-Time Data Processing System** that tracks weath
   - Maximum temperature
   - Minimum temperature
   - Dominant weather condition with explanations
+- **Database Population**: Data from API is fetched every 5 minutes, using the inbuild feature in Javascript and the data that has been fetched is injected into the database collection.
+  - The data settled in the Database is later used for Aggregation such as calculating average temperature and dominant weather conditions. 
 - **Alerting Mechanism**: Allows users to set temperature thresholds. Alerts are triggered when these thresholds are exceeded.
 - **Visual Data Representation**: Provides graphical displays for daily weather summaries and historical trends.
 - **News Integration**: Fetches the latest weather-related news from the News API.
 - **City Suggestions**: Uses the GeoNames API to suggest city names for users.
+  
 
 ## Data Source
 Weather data is retrieved from the [OpenWeatherMap API](https://openweathermap.org/). A free API key is required to access the service. The system primarily focuses on the following parameters:
