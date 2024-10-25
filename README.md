@@ -53,3 +53,14 @@ To set up the project locally:
 3. Run the following command to install all necessary dependencies:
    ```bash
    npm run install-all
+## Docker Deployment
+To run the application using Docker, you can pull the latest version of the Docker image:
+
+
+docker pull subhank31/weather-app:latest
+Note: The application has been developed on an Apple Silicon chip, so ensure that your Docker environment is compatible. Use the appropriate versioning to run the application smoothly on your setup.
+
+## Running the Application
+To launch the application, execute the following command:
+npm run dev
+This command will start both the backend server and the frontend interface simultaneously.
