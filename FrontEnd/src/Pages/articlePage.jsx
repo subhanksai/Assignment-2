@@ -25,7 +25,7 @@ function ArticlePage() {
     }
 
     // Set an interval for refreshing the data if needed
-    const intervalId = setInterval(fetchData, 10800000); // Adjusted to 5 minutes
+    const intervalId = setInterval(fetchData, 7200000); // Adjusted to 5 minutes
 
     return () => clearInterval(intervalId); // Clear interval on unmount
   }, [location.state]); // Dependency array includes location.state
@@ -52,7 +52,7 @@ function ArticlePage() {
               </a>
               <p>Author: {article.author || "Unknown Author"}</p>
               <p>
-                {article.content?.substring(0, 100) || "No Content Available"}
+                {article.content?.substring(0, 200) || "No Content Available"}
                 ...
               </p>
             </li>

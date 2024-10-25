@@ -104,20 +104,47 @@ async function saveWeatherDataToDB(weather) {
     }
   }
 }
-
 server.get("/summary", async (req, res) => {
   const { date } = req.query; // Get the date from the query parameters
-  console.log("Here");
+
+  // Define the allowed cities
+  const allowedCities = [
+    "Delhi",
+    "Mumbai",
+    "Chennai",
+    "Bengaluru",
+    "Kolkata",
+    "Hyderabad",
+  ];
 
   try {
-    const query = date ? { date: date } : {}; // If date is provided, filter by it
-    const weatherData = await weatherDataSchema.find(query); // Fetch all records
-    res.status(200).json(weatherData);
+    // Create the query object
+    const query = {
+      city: { $in: allowedCities }, // Filter for the specified cities
+    };
+
+    // If a date is provided, also filter by date
+    if (date) {
+      query.date = date;
+    }
+
+    // Fetch records based on the query
+    const weatherData = await weatherDataSchema.find(query);
+
+    // Check if any data was found
+    if (weatherData.length === 0) {
+      return res
+        .status(404)
+        .json({ message: "No weather data found for the specified cities." });
+    }
+
+    res.status(200).json(weatherData); // Send the fetched data
   } catch (error) {
     console.error("Error fetching weather data:", error.message);
     res.status(500).json({ error: "Error fetching weather data." });
   }
 });
+
 function timeStringToDate(timeStr) {
   const date = new Date(); // Create a new Date object for today
   const [hours, minutes, seconds] = timeStr.split(":").map(Number); // Split time string and convert to numbers
@@ -199,7 +226,7 @@ server.post("/getArticle", async (req, res) => {
   now.setHours(now.getHours() - 24); // Subtract 24 hours
   const fromDate = now.toISOString().split("T")[0]; // Date from 24 hours ago in YYYY-MM-DD format
 
-  const URL = `https://newsapi.org/v2/everything?q=weather&from=${fromDate}&to=${toDate}&sortBy=popularity&language=en&apiKey=${newsapiapiKey}`;
+  const URL = `https://newsapi.org/v2/everything?q=cyclone&from=${fromDate}&to=${toDate}&sortBy=popularity&language=en&apiKey=${newsapiapiKey}`;
 
   try {
     const response = await axios.get(URL);

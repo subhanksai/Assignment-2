@@ -166,7 +166,7 @@ function Home(props) {
       };
 
       fetchData();
-      const intervalId = setInterval(fetchData, 10800000);
+      const intervalId = setInterval(fetchData, 7200000);
 
       return () => clearInterval(intervalId);
     }, []);
@@ -181,6 +181,7 @@ function Home(props) {
   };
 
   ArticleDataFetch();
+  console.log(article);
 
   return (
     <div className="container">
@@ -288,21 +289,28 @@ function Home(props) {
               {/* Adjusted to 4 out of 12 columns */}
               <h2>Top Stories Around World</h2>
               <div>
-                {[0, 1, 2].map((i) => (
-                  <div key={i} className="right-rail-article">
-                    <a
-                      href={article[i]?.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="article-link"
-                    >
-                      <div className="article-arrange">
-                        <h5>{article[i]?.title}</h5>
-                        <p>{article[i]?.author}</p>
-                      </div>
-                    </a>
-                  </div>
-                ))}
+                {[...Array(3)].map((_, i) => {
+                  // Generate a random index within the bounds of the `article` array length
+                  const randomIndex = Math.floor(
+                    Math.random() * article.length
+                  );
+
+                  return (
+                    <div key={i} className="right-rail-article">
+                      <a
+                        href={article[randomIndex]?.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="article-link"
+                      >
+                        <div className="article-arrange">
+                          <h5>{article[randomIndex]?.title}</h5>
+                          <p>{article[randomIndex]?.author}</p>
+                        </div>
+                      </a>
+                    </div>
+                  );
+                })}
               </div>
               <div className="right-rail-ga" role="button" tabIndex="0">
                 <a href="/articles">
