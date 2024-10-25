@@ -97,7 +97,7 @@ function Home(props) {
               }
 
               const data = localResponse.data; // Assuming you want to do something with this
-              console.log("Local Data:", data);
+              // console.log("Local Data:", data);
 
               // Extract temperature, main weather, and icon
               const cityData = {

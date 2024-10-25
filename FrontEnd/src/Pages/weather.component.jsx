@@ -12,7 +12,7 @@ import {
 } from "recharts";
 
 const WeatherGraph = () => {
-  const [city, setCity] = useState("Mumbai");
+  const [city, setCity] = useState("");
   const [weatherData, setWeatherData] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -34,28 +34,20 @@ const WeatherGraph = () => {
 
       for (let i = weatherData.length - 1; i >= 0; i--) {
         const currentReading = weatherData[i];
-        const currentTime = new Date(currentReading.time);
 
-        if (
-          !lastReadingTime ||
-          lastReadingTime - currentTime >= 60 * 60 * 1000
-        ) {
-          // Push the reading if it's the first or spaced by 1 hour
-          lastFiveReadings.push({
-            time: currentReading.time,
-            temperature: currentReading.temperature,
-          });
-          lastReadingTime = currentTime; // Update the last reading time
+        // Push the reading if it's the first or spaced by 1 hour
+        lastFiveReadings.push({
+          time: currentReading.time,
+          temperature: currentReading.temperature,
+        });
 
-          // Stop after collecting 5 readings
-          if (lastFiveReadings.length === 5) break;
-        }
+        // Stop after collecting 5 readings
       }
 
-      console.log(
-        "Filtered last 5 readings with 1-hour difference",
-        lastFiveReadings
-      );
+      // console.log(
+      //   "Filtered last 5 readings with 1-hour difference",
+      //   lastFiveReadings
+      // );
 
       // Update state with the processed data
       setWeatherData(lastFiveReadings.reverse()); // Reverse to maintain chronological order
@@ -79,6 +71,9 @@ const WeatherGraph = () => {
         alignItems: "center",
         padding: "20px",
         marginTop: "10px",
+        backgroundColor: "#f0f8ff", // Light background color
+        borderRadius: "8px",
+        boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)", // Shadow effect
       }}
     >
       {/* Dropdown for city selection */}
@@ -87,16 +82,20 @@ const WeatherGraph = () => {
         onChange={(e) => setCity(e.target.value)}
         style={{
           marginBottom: "20px",
-          padding: "10px",
+          padding: "12px",
           fontSize: "16px",
           borderRadius: "5px",
-          border: "1px solid #ccc",
+          border: "1px solid #007bff", // Blue border
+          outline: "none",
+          transition: "border-color 0.3s",
         }}
+        onFocus={(e) => (e.target.style.borderColor = "#0056b3")} // Darker border on focus
+        onBlur={(e) => (e.target.style.borderColor = "#007bff")} // Original border on blur
       >
         <option value="Delhi">Delhi</option>
         <option value="Mumbai">Mumbai</option>
         <option value="Chennai">Chennai</option>
-        <option value="Bangalore">Bangalore</option>
+        <option value="Bengaluru">Bengaluru</option>
         <option value="Kolkata">Kolkata</option>
         <option value="Hyderabad">Hyderabad</option>
         {/* Add more city options as needed */}
@@ -104,23 +103,23 @@ const WeatherGraph = () => {
 
       {/* Display loading state or error message */}
       {loading ? (
-        <p>Loading...</p>
+        <p style={{ fontSize: "18px", color: "#555" }}>Loading...</p>
       ) : error ? (
-        <p>{error}</p>
+        <p style={{ fontSize: "18px", color: "red" }}>{error}</p>
       ) : (
         <LineChart
-          width={600}
-          height={300}
+          width={800}
+          height={500}
           data={weatherData}
           margin={{ top: 20, right: 30, left: 20, bottom: 10 }}
           style={{
-            backgroundColor: "#f9f9f9",
+            backgroundColor: "#ffffff", // White background for the chart
             border: "1px solid #ddd",
             borderRadius: "8px",
             padding: "10px",
           }}
         >
-          <CartesianGrid strokeDasharray="3 3" stroke="#ccc" />
+          <CartesianGrid strokeDasharray="4 4" stroke="#ccc" />
           <XAxis dataKey="time" tick={{ fontSize: 12, fill: "#333" }} />
           <YAxis tick={{ fontSize: 12, fill: "#333" }} />
           <Tooltip
@@ -140,12 +139,10 @@ const WeatherGraph = () => {
           <Line
             type="monotone"
             dataKey="temperature"
-            stroke="#8884d8"
-            activeDot={{ r: 8 }}
-            dot={{ stroke: "#8884d8", strokeWidth: 2 }}
-          >
-            <LabelList dataKey="temperature" position="top" />
-          </Line>
+            stroke="#007bff" // Blue line color
+            activeDot={{ r: 8, stroke: "#fff", strokeWidth: 2 }}
+            dot={{ stroke: "#007bff", strokeWidth: 2 }} // Dot style
+          />
         </LineChart>
       )}
     </div>

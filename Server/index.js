@@ -118,20 +118,70 @@ server.get("/summary", async (req, res) => {
     res.status(500).json({ error: "Error fetching weather data." });
   }
 });
-
+function timeStringToDate(timeStr) {
+  const date = new Date(); // Create a new Date object for today
+  const [hours, minutes, seconds] = timeStr.split(":").map(Number); // Split time string and convert to numbers
+  date.setHours(hours, minutes, seconds); // Set hours, minutes, and seconds
+  return date;
+}
 server.get("/graph", async (req, res) => {
-  const { city, date } = req.query; // Get the city and date from the query parameters
-  console.log("Here");
+  const { city } = req.query; // Get the city from the query parameters
+  console.log("Fetching weather data...");
 
   try {
-    // Build query object based on provided query parameters
+    // Build query object based on provided city parameter
     const query = {};
-    if (city) query.city = city;
-    if (date) query.date = date;
+    if (city) query.city = city; // Only filter by city
 
     // Fetch weather data based on the query
-    const weatherData = await weatherDataSchema.find(query); // Fetch records based on city and/or date
-    res.status(200).json(weatherData);
+    const weatherData = await weatherDataSchema.find(query).sort({ time: -1 });
+
+    // Check if there's enough data
+    if (weatherData.length === 0) {
+      return res.status(404).json({ message: "No weather data found." });
+    }
+
+    const lastFiveReadings = [];
+    let lastReadingTime = null;
+
+    for (let i = 0; i < weatherData.length; i++) {
+      const currentReading = weatherData[i];
+      const currentTime = currentReading.time; // Ensure currentTime is a string here
+
+      // For the first reading or if we have 5 readings already
+      if (lastFiveReadings.length < 5) {
+        lastFiveReadings.push({
+          time: currentReading.time,
+          temperature: currentReading.temperature,
+        });
+        lastReadingTime = currentTime; // Set the first reading time
+      } else {
+        const date1 = timeStringToDate(currentTime);
+        const date2 = timeStringToDate(lastReadingTime);
+
+        // Calculate the difference in milliseconds
+        const timeDifference = date1.getTime() - date2.getTime(); // Difference in milliseconds
+
+        // Convert difference to seconds
+        const differenceInSeconds = Math.abs(timeDifference / 1000); // Convert to seconds
+
+        // Check if the difference is greater than or equal to 30 minutes (1800 seconds)
+        if (differenceInSeconds >= 1800) {
+          // Changed to 1800 for 30 minutes
+          lastFiveReadings.push({
+            time: currentReading.time,
+            temperature: currentReading.temperature,
+          });
+          lastReadingTime = currentTime; // Update the last reading time
+
+          // Stop after collecting 5 readings
+          if (lastFiveReadings.length === 5) break;
+        }
+      }
+    }
+
+    // Reverse to show the latest readings first
+    res.status(200).json(lastFiveReadings.reverse());
   } catch (error) {
     console.error("Error fetching weather data:", error.message);
     res.status(500).json({ error: "Error fetching weather data." });
@@ -199,7 +249,7 @@ server.get("/weather", async (req, res) => {
 
 server.post("/getCity", async (req, res) => {
   const { cityName } = req.body;
-  console.log(cityName);
+  // console.log(cityName);
 
   // Log received city name
   console.log(`Received city name: ${cityName}`);

@@ -110,7 +110,7 @@ function Alertprocessing({ weatherData }) {
   }
 
   return (
-    <div style={{ marginTop: "170px" }}>
+    <div style={{ marginTop: "400px" }}>
       <h1 className="mb-4">Triggers</h1>
       {storedData.length > 0 ? (
         <ul className="list-group">
